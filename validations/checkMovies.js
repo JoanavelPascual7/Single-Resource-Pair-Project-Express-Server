@@ -25,5 +25,5 @@ const checkYear = (req, res, next) => {
     }
   };
   
-      
   module.exports = { checkBoolean, checkYear, checkTitle };
+  

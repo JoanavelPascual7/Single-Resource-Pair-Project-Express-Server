@@ -76,10 +76,16 @@ movies.delete("/:id", async (req, res) => {
 });
 
 // UPDATE
-movies.put("/:id", checkTitle, checkBoolean, async (req, res) => {
+movies.put("/:id", checkTitle, checkBoolean, checkYear, async (req, res) => {
   try {
     const { id } = req.params;
     console.log("Updating movie with ID:", id);
+    
+ 
+    if (!req.body.year) {
+      return res.status(400).json({ error: "Year is required" });
+    }
+
     const updatedMovie = await updateMovie(id, req.body);
     console.log("Updated Movie:", updatedMovie);
     res.status(200).json(updatedMovie);
@@ -88,5 +94,6 @@ movies.put("/:id", checkTitle, checkBoolean, async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
+
 
 module.exports = movies;
