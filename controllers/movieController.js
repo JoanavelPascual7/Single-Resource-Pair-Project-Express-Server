@@ -12,7 +12,6 @@ const { checkYear, checkBoolean, checkTitle } = require("../validations/checkMov
 // INDEX
 movies.get("/", async (req, res) => {
   try {
-    console.log("Calling getAllMovies...");
     const allMovies = await getAllMovies();
     console.log("All Movies:", allMovies);
     if (allMovies.length > 0) {
@@ -47,7 +46,6 @@ movies.get("/:id", async (req, res) => {
 // CREATE
 movies.post("/", checkTitle, checkBoolean, async (req, res) => {
   try {
-    console.log("Creating a new movie...");
     const newMovie = await createMovie(req.body);
     console.log("New Movie:", newMovie);
     res.json(newMovie);
